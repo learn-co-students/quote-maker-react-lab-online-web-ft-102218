@@ -62,7 +62,7 @@ class QuoteForm extends Component {
                   </div>
                   <div className="form-group">
                     <div className="col-md-6 col-md-offset-4">
-                      <button onSubmit={type="submit" className="btn btn-default">Add</button>
+                      <button onSubmit={(event) => this.handleOnSubmit(event)} type="submit" className="btn btn-default">Add</button>
                     </div>
                   </div>
                 </form>
