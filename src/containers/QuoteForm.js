@@ -8,7 +8,7 @@ class QuoteForm extends Component {
   state = {
     content: '',
     author: '',
-    vote: 0
+    votes: 0
   }
 
   handleOnChange = event => {
@@ -19,13 +19,13 @@ class QuoteForm extends Component {
 
   handleOnSubmit = event => {
     event.preventDefault();
-    const quote = {...this.state, quoteId: uuid() };
+    const quote = {...this.state, id: uuid() };
     this.props.addQuote(quote);
     console.log(quote)
     this.setState({
-      title: '',
       author: '',
-      vote: 0
+      content: '',
+      votes: 0
     });  
   }
 
@@ -36,7 +36,7 @@ class QuoteForm extends Component {
           <div className="col-md-8 col-md-offset-2">
             <div className="panel panel-default">
               <div className="panel-body">
-                <form className="form-horizontal">
+                <form onSubmit={(event) => this.handleOnSubmit(event)} className="form-horizontal">
                   <div className="form-group">
                     <label htmlFor="content" className="col-md-4 control-label">Quote</label>
                     <div className="col-md-5">
@@ -62,7 +62,7 @@ class QuoteForm extends Component {
                   </div>
                   <div className="form-group">
                     <div className="col-md-6 col-md-offset-4">
-                      <button onSubmit={(event) => this.handleOnSubmit(event)} type="submit" className="btn btn-default">Add</button>
+                      <button type="submit" className="btn btn-default">Add</button>
                     </div>
                   </div>
                 </form>

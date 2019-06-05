@@ -1,21 +1,30 @@
 import uuid from 'uuid'
 
 export default function reducer(state = [], action) {
-  let idx;
+  let quote;
+  let newState;
   switch (action.type) {
     case "ADD_QUOTE":
       return [...state, action.quote];
  
     case "REMOVE_QUOTE":
-      idx = state.indexOf(action.quoteId);
-      return [...state.slice(0, idx), ...state.slice(idx + 1)];
+      return state.filter((quote) => quote.id != action.quoteId);
 
     case "UPVOTE_QUOTE":
-      return [...state, action.author];
+      newState = [...state]
+      quote = newState.find((quote) => quote.id == action.quoteId)
+      quote.votes++
+      return newState
  
     case "DOWNVOTE_QUOTE":
-      idx = state.indexOf(action.quoteId);
-      return [...state.slice(0, idx), ...state.slice(idx + 1)];   
+        newState = [...state]
+        quote = newState.find((quote) => quote.id == action.quoteId)
+
+        if(quote.votes > 0)
+          quote.votes--
+        else
+          alert('Vote is 0')
+        return newState
       
     default:
       return state;
